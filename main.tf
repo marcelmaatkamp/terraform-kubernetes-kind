@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     kind = {
-      source = "unicell/kind"
-      version = "0.0.2-u2"
+      source = "kyma-incubator/kind"
+      version = "0.0.11"
     }
     kubernetes = {
       source = "hashicorp/kubernetes"
@@ -23,7 +23,6 @@ resource "kind_cluster" "default" {
   name = "new-cluster"
   kubeconfig_path = local.k8s_config_path
   wait_for_ready = true
-
   kind_config {
     kind = "Cluster"
     api_version = "kind.x-k8s.io/v1alpha4"
