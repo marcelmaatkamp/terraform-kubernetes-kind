@@ -1,7 +1,18 @@
 # terraform: kubernetes wth kind
 
 # pre 
-Must have installed docker, else 
+
+## open files
+```
+$ sysctl -w fs.file-max=1000000
+```
+
+/etc/security/limits.conf 
+```
+```
+
+
+## Install docker
 ```
 $ \
  sudo apt-get remove \
@@ -26,6 +37,7 @@ $ \
 ```
 
 # installation
+Install dependencies like terraform
 ```
 $ \
  sudo apt-get install -y \

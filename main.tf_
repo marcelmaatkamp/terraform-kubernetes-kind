@@ -8,10 +8,6 @@ terraform {
       source = "hashicorp/kubernetes"
       version = "2.7.1"
     }
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = ">= 1.7.0"
-    }
     argocd = {
       source = "oboukili/argocd"
       version = "2.1.0"
@@ -53,51 +49,22 @@ provider "kubernetes" {
   config_path = ".kube/config"
 }
 
-resource "kubernetes_namespace" "argocd" {
-  metadata {
-    annotations = {
-      name = "example-annotation"
-    }
-    labels = {
-      mylabel = "label-value"
-    }
-    name = "argocd"
-  }
-}
-
-provider "kubectl" {
-  config_path = ".kube/config"
-}
-
-
-data "kubectl_file_documents" "argocd" {
-    content = file("etc/argo-cd/v2.2.3/manifests/install.yaml")
-}
-
-resource "kubectl_manifest" "argocd" {
-    count     = length(data.kubectl_file_documents.argocd.documents)
-    yaml_body = element(data.kubectl_file_documents.argocd.documents, count.index)
-    override_namespace = "argocd"
-}
-
 provider "argocd" {
-  server_addr = "argocd-server.argocd:443" # env ARGOCD_SERVER
+  server_addr = "argocd.local:443" # env ARGOCD_SERVER
   auth_token  = "1234..."          # env ARGOCD_AUTH_TOKEN
   # username  = "admin"            # env ARGOCD_AUTH_USERNAME
   # password  = "foo"              # env ARGOCD_AUTH_PASSWORD
   insecure    = false              # env ARGOCD_INSECURE
-  kubernetes { 
-    config_path = local.k8s_config_path
-  }
 }
 
 resource "argocd_cluster" "kubernetes" {
-  server = "https://argocd-server.argocd:443"
+  server = "https://1.2.3.4:12345"
 
   config {
+    config_path = local.k8s_config_path
     tls_client_config {
-      # ca_data = base64encode(file("path/to/ca.pem"))
-      # insecure = true
+      ca_data = base64encode(file("path/to/ca.pem"))
+      // insecure = true
     }
   }
 }
@@ -177,3 +144,47 @@ resource "argocd_repository" "public_nginx_helm" {
   type = "helm"
 }
 
+resource "argocd_application" "helm" {
+
+  metadata {
+    name      = "helm-app"
+    namespace = "argocd"
+    labels = {
+      test = "true"
+    }
+  }
+
+  wait = true
+
+  spec {
+    source {
+      repo_url        = "https://some.chart.repo.io"
+      chart           = "mychart"
+      target_revision = "1.2.3"
+      helm {
+        parameter {
+          name  = "image.tag"
+          value = "1.2.3"
+        }
+        parameter {
+          name  = "someotherparameter"
+          value = "true"
+        }
+        value_files = ["values-test.yml"]
+        values      = <<EOT
+someparameter:
+  enabled: true
+  someArray:
+  - foo
+  - bar
+EOT
+        release_name = "testing"
+      }
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "default"
+    }
+  }
+}
