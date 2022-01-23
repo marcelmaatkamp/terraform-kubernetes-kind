@@ -20,7 +20,8 @@ $ \
  sudo apt update &&\
  sudo apt install -y \
   docker-ce docker-ce-cli containerd.io &&\
- sudo groupadd docker &&\
+ sudo groupadd docker;
+ sudo gpasswd -a $USER docker;
  sudo usermod -aG docker $USER
 ```
 
@@ -57,6 +58,6 @@ $ \
  terraform plan &&\
  terraform apply -auto-approve
 
-$ \ 
- KUBECTL=.kube/config kubectl get all -A
+$ \
+  KUBECONFIG=${PWD}/.kube/config kubectl get all -A
 ```
