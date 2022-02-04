@@ -30,3 +30,4 @@ $ \
 bin/kubectl port-forward -n argocd service/argocd-server --address 0.0.0.0 8080:80
 ```
 ![argocd](images/argocd.png)
+![argocd](images/argocd_applications_empty.png)
