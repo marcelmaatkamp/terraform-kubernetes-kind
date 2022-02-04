@@ -30,3 +30,4 @@ override.tf.json
 
 .kube/
 .terraform*
+.DS_Store
