@@ -66,10 +66,9 @@ $ \
 # usage
 ```
 $ \
- terraform init &&\
- terraform plan &&\
- terraform apply -auto-approve
-
-$ \
-  KUBECONFIG=${PWD}/.kube/config kubectl get all -A
+bin/apply
 ```
+
+# kubectl
+```
+$ \

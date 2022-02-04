@@ -1,0 +1,2 @@
+#!/bin/bash
+KUBECONFIG=${PWD}/.kube/config kubectl ${*}
