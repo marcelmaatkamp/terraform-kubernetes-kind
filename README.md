@@ -1,22 +1,17 @@
-# terraform: kubernetes wth kind
+# install kubernetes (kind) with terraform
 
-# pre 
+# install prerequisites
+ * docker
+ * terraform 
+ * kubectl 
+ 
+## install docker
+Install docker, see 
+https://gist.github.com/marcelmaatkamp/f2ec82d660b96baf1b87eaccfc7d3ff1
 
-## open files
-```
-$ sysctl -w fs.file-max=1000000
-```
-
-/etc/security/limits.conf 
-```
-```
-
-
-## Install docker
 {% gist f2ec82d660b96baf1b87eaccfc7d3ff1 %}
 
-# installation
-Install dependencies like terraform
+## install terraform and kind
 ```
 $ \
  sudo apt-get install -y \
@@ -42,16 +37,15 @@ $ \
   kubectl
 ```
 
-# usage
+# install kubernetes and argocd
 ```
 $ \
 bin/apply
 ```
 
-# kubectl
+# connect to argocd
 ```
 $ \
 bin/kubectl port-forward -n argocd service/argocd-server --address 0.0.0.0 8080:80
 ```
-
 ![argocd](images/argocd.png)
