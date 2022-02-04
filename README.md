@@ -7,12 +7,14 @@
  
 ## install docker
 Install docker, see 
-https://gist.github.com/marcelmaatkamp/f2ec82d660b96baf1b87eaccfc7d3ff1
+ - https://gist.github.com/marcelmaatkamp/f2ec82d660b96baf1b87eaccfc7d3ff1
+
 {% gist f2ec82d660b96baf1b87eaccfc7d3ff1 %}
 
 ## install terraform and kind
 Install terraform and kubectl, see
-https://gist.github.com/marcelmaatkamp/48edccf7d631ada926ef81bb883f4b5f
+ - https://gist.github.com/marcelmaatkamp/48edccf7d631ada926ef81bb883f4b5f
+
 {% gist 48edccf7d631ada926ef81bb883f4b5f %}
 
 # install kubernetes and argocd
