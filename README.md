@@ -1,4 +1,5 @@
 # Install Kubernetes (kind) and ArgoCD with Terraform
+![argocd](images/argocd.png)
 
 # Install prerequisites
  * docker
@@ -17,16 +18,22 @@ Install terraform and kubectl, see
 
 {% gist 48edccf7d631ada926ef81bb883f4b5f %}
 
-# Install kubernetes and argocd
-```
+## Install Kubernetes (kind)
+```bash
 $ \
-bin/apply
+bin/install_kind
 ```
 
-# ArgoCD
-
-## Get ArgoCD password
+## Install ArgoCD
+```bash
+$ \
+bin/install_argocd
 ```
+
+# Connect to ArgoCD
+
+## Get ArgoCD admin password
+```bash
 $ \
 bin/kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
@@ -36,5 +43,4 @@ Port forward ArgoCD to http://localhost:8080
 $ \
 bin/kubectl port-forward -n argocd service/argocd-server --address 0.0.0.0 8080:80
 ```
-![argocd](images/argocd.png)
 ![argocd](images/argocd_applications_empty.png)
