@@ -15,11 +15,11 @@ provider "kubectl" {
 }
 
 module "kind" {
-  source = "./modules/kind"
+  source = "etc/terraform/modules/kind"
   config_path = local.config_path
 }
 
 module "argocd" {
-  source = "./modules/argocd"
+  source = "etc/terraform/modules/argocd"
   config_path = local.config_path
 }

@@ -29,7 +29,7 @@ resource "kubernetes_namespace" "argocd" {
 }
 
 data "kubectl_file_documents" "argocd" {
-  content = file("etc/argo-cd/v2.2.3/manifests/install.yaml")
+  content = file("etc/argocd/argo-cd/v2.2.3/manifests/install.yaml")
 }
 
 resource "kubectl_manifest" "argocd" {
