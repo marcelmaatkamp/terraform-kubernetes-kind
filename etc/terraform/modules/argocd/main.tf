@@ -1,28 +1,11 @@
-terraform {
-  required_providers {
-    kubernetes = {
-      source = "hashicorp/kubernetes"
-      version = "2.7.1"
-    }
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = ">= 1.7.0"
-    }
-    argocd = {
-      source = "oboukili/argocd"
-      version = "2.1.0"
-    }
-  }
-}
-
 resource "kubernetes_namespace" "argocd" {
   metadata {
     annotations = {
-      name = "example-annotation"
+      name = "argocd"
     }
 
     labels = {
-      mylabel = "label-value"
+      mylabel = "argocd"
     }
     name = "argocd"
   }
