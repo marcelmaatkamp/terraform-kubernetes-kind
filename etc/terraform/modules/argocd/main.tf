@@ -7,15 +7,15 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
 
   set { 
-    name = "repositories[0].name"
+    name = "configs.repositories[0].name"
     value = "helm-charts-stable"
   }
   set {
-    name = "repositories[0].url"
+    name = "configs.repositories[0].url"
     value = "https://charts.helm.sh/stable"
   }
   set {
-    name = "repositories[0].type"
+    name = "configs.repositories[0].type"
     value = "helm"
   }
 
