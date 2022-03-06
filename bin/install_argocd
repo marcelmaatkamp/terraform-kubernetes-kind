@@ -1,4 +1,4 @@
 #!/bin/bash
 terraform init &&\
-terraform plan &&\
-terraform apply -auto-approve 
+terraform plan --target module.argocd &&\
+terraform apply --target module.argocd  --auto-approve 
