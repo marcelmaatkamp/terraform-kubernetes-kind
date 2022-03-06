@@ -1,5 +1,8 @@
 #!/bin/bash
+<<<<<<< HEAD
+=======
 terraform init &&\
+>>>>>>> e4263c3b6593317b55fcdf4b2d6eabd8ec7cd559
 terraform plan -target module.kind &&\
 terraform apply -target module.kind -auto-approve &&\
 terraform plan &&\

@@ -6,6 +6,11 @@ provider "kind" {
 
 }
 
+module "kind" {
+  source = "./etc/terraform/modules/kind"
+  config_path = local.config_path
+}
+
 provider "kubernetes" {
   config_path = local.config_path
 }
@@ -14,9 +19,10 @@ provider "kubectl" {
   config_path = local.config_path
 }
 
-module "kind" {
-  source = "./etc/terraform/modules/kind"
-  config_path = local.config_path
+provider "helm" {
+  kubernetes {
+    config_path = local.config_path
+  }
 }
 
 module "argocd" {
