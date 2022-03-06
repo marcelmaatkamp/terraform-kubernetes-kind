@@ -1,10 +1,4 @@
 #!/bin/bash
-<<<<<<< HEAD
-terraform plan &&\
-terraform apply -auto-approve 
-
-=======
 terraform init &&\
 terraform plan &&\
 terraform apply -auto-approve 
->>>>>>> e4263c3b6593317b55fcdf4b2d6eabd8ec7cd559
