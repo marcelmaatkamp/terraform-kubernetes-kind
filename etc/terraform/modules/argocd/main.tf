@@ -81,12 +81,39 @@ resource "helm_release" "argocd" {
     value = true
   }
   set {
+    name = "server.additionalApplications[0].syncPolicy.retry.limit"
+    value = "-1"
+  }
+  set {
+    name = "server.additionalApplications[0].syncPolicy.retry.backoff.duration"
+    value = "5s"
+  }
+  set {
+    name = "server.additionalApplications[0].syncPolicy.retry.backoff.factor"
+    value = "2"
+  }
+  set {
+    name = "server.additionalApplications[0].syncPolicy.retry.backoff.maxDuration"
+    value = "3m"
+  }
+  set {
     name = "server.additionalApplications[0].directory.recurse"
     value = true
   }
   set {
-    name = "server.additionalApplications[0].syncPolicy.syncOptions"
-    value = ["CreateNamespace=true"]
+    name = "server.additionalApplications[0].syncPolicy.syncOptions[0]"
+    value = "CreateNamespace=true"
   }
-
+  set {
+    name = "server.additionalApplications[0].syncPolicy.syncOptions[1]"
+    value = "Validate=true"
+  }
+  set {
+    name = "server.additionalApplications[0].syncPolicy.syncOptions[2]"
+    value = "PrunePropagationPolicy=foreground"
+  }
+  set {
+    name = "server.additionalApplications[0].syncPolicy.syncOptions[3]"
+    value = "PruneLast=true"
+  }
 }
