@@ -1,2 +1,2 @@
 #!/bin/bash
-terraform destroy --target module.argocd --auto-approve
+terraform destroy --target module.argocd -var-file="test.tfvars" --auto-approve

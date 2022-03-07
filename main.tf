@@ -29,7 +29,12 @@ provider "helm" {
 module "argocd" {
   source = "./etc/terraform/modules/argocd"
   config_path = local.config_path
-  repoUurl = local.app_url
+  name = var.name
+  projectName = var.projectName
+  repoUrl = var.repoUrl
+  repoPath = var.repoPath
+  repoTargetRevision = var.repoTargetRevision
+  destinationNamespace = var.destinationNamespace
   depends_on = [
     module.kind
   ]

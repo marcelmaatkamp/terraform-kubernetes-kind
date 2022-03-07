@@ -8,6 +8,8 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
 
+  # https://charts.helm.sh/stable
+
   set { 
     name = "configs.repositories[0].name"
     value = "helm-charts-stable"
@@ -21,26 +23,70 @@ resource "helm_release" "argocd" {
     value = "helm"
   }
 
+  # https://runatlantis.github.io/helm-charts
+
   set {
-    name = "configs.additionalApplications[0].name"
-    value = "project"
+    name = "configs.repositories[1].name"
+    value = "runatlantis"
   }
   set {
-    name = "configs.additionalApplications[0].project"
-    value = "project"
+    name = "configs.repositories[1].url"
+    value = "https://runatlantis.github.io/helm-charts"
   }
   set {
-    name = "configs.additionalApplications[0].source.repoURL"
-    value = var.repoURL
+    name = "configs.repositories[1].type"
+    value = "helm"
+  }
+
+  # repoURL
+
+  set {
+    name = "server.additionalApplications[0].name"
+    value = var.name
   }
   set {
-    name = "configs.additionalApplications[0].source.path"
+    name = "server.additionalApplications[0].project"
+    value = var.projectName
+  }
+  set {
+    name = "server.additionalApplications[0].source.repoURL"
+    value = var.repoUrl
+  }
+  set {
+    name = "server.additionalApplications[0].source.path"
     value = var.repoPath
   }
   set {
-    name = "configs.additionalApplications[0].source.targetRevision"
+    name = "server.additionalApplications[0].source.targetRevision"
     value = var.repoTargetRevision
+  }
+  set {
+    name = "server.additionalApplications[0].destination.server"
+    value = "https://kubernetes.default.svc"
+  }
+  set {
+    name = "server.additionalApplications[0].destination.namespace"
+    value = var.destinationNamespace
+  }
+  set {
+    name = "server.additionalApplications[0].destination.namespace"
+    value = var.destinationNamespace
+  }
+  set {
+    name = "server.additionalApplications[0].syncPolicy.automated.prune"
+    value = true
+  }
+  set {
+    name = "server.additionalApplications[0].syncPolicy.automated.selfHeal"
+    value = true
+  }
+  set {
+    name = "server.additionalApplications[0].directory.recurse"
+    value = true
+  }
+  set {
+    name = "server.additionalApplications[0].syncPolicy.syncOptions"
+    value = ["CreateNamespace=true"]
   }
 
 }
-

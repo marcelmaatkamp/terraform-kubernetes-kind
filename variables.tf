@@ -1,5 +1,3 @@
-variable "config_path" {
-}
 variable "name" {
   type     = string
   nullable = false
@@ -10,13 +8,13 @@ variable "projectName" {
 }
 variable "repoUrl" {
   type     = string
-  nullable = false
+  nullable = false 
 }
-variable "repoPath" {
+variable "repoPath" {  
   type     = string
   nullable = false
 }
-variable "repoTargetRevision" {
+variable "repoTargetRevision" { 
   type     = string
   nullable = false
 }
