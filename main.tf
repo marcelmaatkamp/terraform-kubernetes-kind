@@ -1,5 +1,6 @@
 locals {
   config_path = pathexpand(".kube/config")
+  app_url = "https://github.com/marcelmaatkamp/argocd-data-processing-superset"
 }
 
 provider "kind" {
@@ -28,6 +29,7 @@ provider "helm" {
 module "argocd" {
   source = "./etc/terraform/modules/argocd"
   config_path = local.config_path
+  repoUurl = local.app_url
   depends_on = [
     module.kind
   ]

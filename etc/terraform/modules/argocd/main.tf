@@ -1,3 +1,5 @@
+# https://github.com/argoproj/argo-helm/blob/master/charts/argo-cd/values.yaml
+
 resource "helm_release" "argocd" {
   name       = "argocd" 
   namespace  = "argocd"
@@ -19,34 +21,26 @@ resource "helm_release" "argocd" {
     value = "helm"
   }
 
-  # additionalApplications: 
-  # - name: guestbook
-  #   namespace: argocd
-  #   additionalLabels: {}
-  #   additionalAnnotations: {}
-  #   finalizers:
-  #   - resources-finalizer.argocd.argoproj.io
-  #   project: guestbook
-  #   source:
-  #     repoURL: https://github.com/argoproj/argocd-example-apps.git
-  #     targetRevision: HEAD
-  #     path: guestbook
-  #     directory:
-  #       recurse: true
-  #   destination:
-  #     server: https://kubernetes.default.svc
-  #     namespace: guestbook
-  #   syncPolicy:
-  #     automated:
-  #       prune: false
-  #       selfHeal: false
-  #   ignoreDifferences:
-  #   - group: apps
-  #     kind: Deployment
-  #     jsonPointers:
-  #     - /spec/replicas
-  #   info:
-  #   - name: url
-  #     value: https://argoproj.github.io/
+  set {
+    name = "configs.additionalApplications[0].name"
+    value = "project"
+  }
+  set {
+    name = "configs.additionalApplications[0].project"
+    value = "project"
+  }
+  set {
+    name = "configs.additionalApplications[0].source.repoURL"
+    value = var.repoURL
+  }
+  set {
+    name = "configs.additionalApplications[0].source.path"
+    value = var.repoPath
+  }
+  set {
+    name = "configs.additionalApplications[0].source.targetRevision"
+    value = var.repoTargetRevision
+  }
+
 }
 
