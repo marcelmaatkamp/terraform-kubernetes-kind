@@ -8,7 +8,6 @@ resource "argocd_application" "helm" {
 
   spec {
     source {
-# runatlantis/atlantis	3.16.0       	v0.19.1    	A Helm chart for Atlantis https://www.runatlant...
       repo_url        = "https://runatlantis.github.io/helm-charts"
       chart           = "atlantis"
       target_revision = "3.16.0"
