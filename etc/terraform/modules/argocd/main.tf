@@ -38,6 +38,21 @@ resource "helm_release" "argocd" {
     value = "helm"
   }
 
+  # kong
+
+  set {
+    name = "configs.repositories[2].name"
+    value = "kong"
+  }
+  set {
+    name = "configs.repositories[2].url"
+    value = "https://charts.konghq.com"
+  }
+  set {
+    name = "configs.repositories[2].type"
+    value = "helm"
+  }
+
   # repoURL
 
   set {

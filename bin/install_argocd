@@ -1,9 +1,9 @@
 #!/bin/bash
-application=${1:-apps}
+application=${1:-applications/apps.tfvars}
 
 terraform init &&\
-terraform plan --target module.argocd -var-file="${application}.tfvars" &&\
-terraform apply --target module.argocd -var-file="${application}.tfvars" --auto-approve 
+terraform plan --target module.argocd -var-file="${application}" &&\
+terraform apply --target module.argocd -var-file="${application}" --auto-approve 
 
 port=8080
 password=$(bin/kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d)

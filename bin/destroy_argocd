@@ -1,4 +1,4 @@
 #!/bin/bash
-application=${1:-apps}
+application=${1:-applications/apps.tfvars}
 
-terraform destroy --target module.argocd -var-file="${application}.tfvars" --auto-approve
+terraform destroy --target module.argocd -var-file="${application}" --auto-approve
