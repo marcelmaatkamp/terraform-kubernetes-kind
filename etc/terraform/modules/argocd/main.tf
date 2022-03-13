@@ -53,6 +53,21 @@ resource "helm_release" "argocd" {
     value = "helm"
   }
 
+  # hashicorp
+
+  set {
+    name = "configs.repositories[3].name"
+    value = "hashicorp"
+  }
+  set {
+    name = "configs.repositories[3].url"
+    value = "https://helm.releases.hashicorp.com"
+  }
+  set {
+    name = "configs.repositories[3].type"
+    value = "helm"
+  }
+
   # repoURL
 
   set {

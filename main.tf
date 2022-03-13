@@ -39,19 +39,3 @@ module "argocd" {
     module.kind
   ]
 }
-
-# module "atlantis" {
-#   source = "./etc/terraform/modules/atlantis"
-#   config_path = local.config_path
-#   depends_on = [
-#     module.argocd
-#   ]
-# }
- 
-# module "grafana" {
-#   source = "./etc/terraform/modules/grafana"
-#   config_path = local.config_path
-#   depends_on = [
-#     module.argocd
-#   ]
-# }
