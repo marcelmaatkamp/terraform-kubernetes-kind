@@ -1,2 +1,2 @@
 #!/bin/bash
-KUBECONFIG=${PWD}/.kube/config kubectl ${*}
+KUBECONFIG=${PWD}/.kube/config kubectl "${@}"
